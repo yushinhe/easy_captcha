@@ -8,12 +8,12 @@ module EasyCaptcha
 
       # set default values
       def defaults
-        @font_size              = 24
-        @font_fill_color        = '#333333'
+        @font_size              = 30
+        @font_fill_color        = '#000000'
         @font                   = File.expand_path('../../../../resources/captcha.ttf', __FILE__)
         @font_stroke = 0
         @font_stroke_color      = '#000000'
-        @background_color = '#FFFFFF'
+        @background_color       = '#FFFFFF'
         @sketch                 = true
         @sketch_radius          = 3
         @sketch_sigma           = 1
@@ -27,7 +27,7 @@ module EasyCaptcha
       end
 
       # Font
-      attr_accessor :font_size, :font_fill_color, :font, :font_family, :font_stroke, :font_stroke_color, :font_weight, :fill, :pointsize
+      attr_accessor :font_size, :font_fill_color, :font, :font_family, :font_stroke, :font_stroke_color, :font_weight, :pointsize
 
       # Background
       attr_accessor :background_color, :background_image, :background_color
@@ -66,23 +66,23 @@ module EasyCaptcha
         require 'rmagick' unless defined?(Magick)
 
         config = self
-        canvas = Magick::Image.new(EasyCaptcha.image_width, EasyCaptcha.image_height) do |image|
-          image.background_color = config.background_color unless config.background_color.nil?
-          image.background_color = 'none' if config.background_image.present?
+        canvas = Magick::Image.new(EasyCaptcha.image_width, EasyCaptcha.image_height) do |img|
+          img.background_color = config.background_color unless config.background_color.nil?
+          img.background_color = 'none' if config.background_image.present?
         end
 
         # Render the text in the image
-        canvas.annotate(Magick::Draw.new, 0, 0, 0, 0, code) {
-          self.gravity     = Magick::CenterGravity
-          self.font        = config.font
-          self.font_weight = Magick::LighterWeight
-          self.fill        = config.font_fill_color
+        canvas.annotate(Magick::Draw.new, 0, 0, 0, 0, code) do |img|
+          img.gravity     = Magick::CenterGravity
+          img.font        = config.font
+          img.font_weight = Magick::LighterWeight
+          img.fill        = config.font_fill_color
           if config.font_stroke.to_i > 0
-            self.stroke       = config.font_stroke_color
-            self.stroke_width = config.font_stroke
+            img.stroke       = config.font_stroke_color
+            img.stroke_width = config.font_stroke
           end
-          self.pointsize = config.font_size
-        }
+          img.pointsize = config.font_size
+        end
 
         # Blur
         canvas = canvas.blur_image(config.blur_radius, config.blur_sigma) if config.blur?
