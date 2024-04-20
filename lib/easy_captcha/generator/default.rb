@@ -11,9 +11,9 @@ module EasyCaptcha
         @font_size              = 24
         @font_fill_color        = '#333333'
         @font                   = File.expand_path('../../../../resources/captcha.ttf', __FILE__)
-        @font_stroke            = '#000000'
-        @font_stroke_color      = 0
-        @image_background_color = '#FFFFFF'
+        @font_stroke = 0
+        @font_stroke_color      = '#000000'
+        @background_color = '#FFFFFF'
         @sketch                 = true
         @sketch_radius          = 3
         @sketch_sigma           = 1
@@ -27,10 +27,10 @@ module EasyCaptcha
       end
 
       # Font
-      attr_accessor :font_size, :font_fill_color, :font, :font_family, :font_stroke, :font_stroke_color
+      attr_accessor :font_size, :font_fill_color, :font, :font_family, :font_stroke, :font_stroke_color, :font_weight, :fill, :pointsize
 
       # Background
-      attr_accessor :image_background_color, :background_image
+      attr_accessor :background_color, :background_image, :background_color
 
       # Sketch
       attr_accessor :sketch, :sketch_radius, :sketch_sigma
@@ -43,6 +43,11 @@ module EasyCaptcha
 
       # Gaussian Blur
       attr_accessor :blur, :blur_radius, :blur_sigma
+
+      # Gravity
+      attr_accessor :gravity
+
+
 
       def sketch? #:nodoc:
         @sketch
@@ -61,9 +66,9 @@ module EasyCaptcha
         require 'rmagick' unless defined?(Magick)
 
         config = self
-        canvas = Magick::Image.new(EasyCaptcha.image_width, EasyCaptcha.image_height) do |variable|
-          self.background_color = config.image_background_color unless config.image_background_color.nil?
-          self.background_color = 'none' if config.background_image.present?
+        canvas = Magick::Image.new(EasyCaptcha.image_width, EasyCaptcha.image_height) do |image|
+          image.background_color = config.background_color unless config.background_color.nil?
+          image.background_color = 'none' if config.background_image.present?
         end
 
         # Render the text in the image
@@ -102,9 +107,11 @@ module EasyCaptcha
           background = Magick::Image.read(config.background_image).first
           background.composite!(canvas, Magick::CenterGravity, Magick::OverCompositeOp)
 
-          image = background.to_blob { self.format = 'PNG' }
+          background.format = 'PNG'
+          image = background.to_blob
         else
-          image = canvas.to_blob { self.format = 'PNG' }
+          canvas.format = 'PNG'
+          image = canvas.to_blob
         end
 
         # ruby-1.9

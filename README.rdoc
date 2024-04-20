@@ -76,7 +76,7 @@ You can configure easy_captcha in "config/initializers/easy_captcha.rb", if you 
 
 
       # Background color
-      # generator.image_background_color = "#FFFFFF"
+      # generator.background_color       = "#FFFFFF"
       # Or background image (e.g. transparent png)
       # generator.background_image       = File.expand_path('../../resources/captcha_bg.png', __FILE__)
 

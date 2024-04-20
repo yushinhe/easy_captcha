@@ -94,7 +94,7 @@ module EasyCaptcha
       name = name.to_s # fix for jruby
       depracations = [
           :font_size, :font_fill_color, :font_family, :font_stroke, :font_stroke_color,
-          :image_background_color, :sketch, :sketch_radius, :sketch_sigma, :wave,
+          :background_color, :sketch, :sketch_radius, :sketch_sigma, :wave,
           :wave_length, :wave_amplitude, :implode, :blur, :blur_radius, :blur_sigma
       ]
 

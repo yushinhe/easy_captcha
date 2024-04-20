@@ -25,7 +25,7 @@ describe EasyCaptcha do
         generator.font_stroke = 0
         generator.font_family = File.expand_path('../../resources/afont.ttf', __FILE__)
 
-        generator.image_background_color = '#FFFFFF'
+        generator.background_color = '#FFFFFF'
 
         # Wave
         generator.wave = true
@@ -47,7 +47,7 @@ describe EasyCaptcha do
       end
     end
 
-    it 'sould not cache' do
+    it 'should not cache' do
       EasyCaptcha.cache?.should be_false
     end
 
@@ -73,7 +73,7 @@ describe EasyCaptcha do
             generator.font_stroke = 0
             generator.font_family = File.expand_path('../../resources/afont.ttf', __FILE__)
 
-            generator.image_background_color = '#FFFFFF'
+            generator.background_color = '#FFFFFF'
 
             # Wave
             generator.wave = true
@@ -99,7 +99,7 @@ describe EasyCaptcha do
       it 'get config' do
         [
           :font_size, :font_fill_color, :font_family, :font_stroke, :font_stroke_color,
-          :image_background_color, :sketch, :sketch_radius, :sketch_sigma, :wave,
+          :background_color, :sketch, :sketch_radius, :sketch_sigma, :wave,
           :wave_length, :wave_amplitude, :implode, :blur, :blur_radius, :blur_sigma
         ].each do |method|
           EasyCaptcha.generator.send(method).should_not be_nil
