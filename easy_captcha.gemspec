@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {spec}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency('rails', [">= 3.0.0"])
-  s.add_dependency('bundler', [">= 1.1.0"])
+  s.add_dependency('rails', [">= 6.0.0"])
+  s.add_dependency('bundler', [">= 2.1.0"])
   s.add_dependency('simplecov', [">= 0.3.8"])
   s.add_dependency('rspec-rails', [">= 2.8.1"])
   s.add_dependency('yard', [">= 0.7.0"])
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   if defined?(PLATFORM) && PLATFORM == 'java'
     s.add_runtime_dependency('rmagick4j','>= 0.3.7')
   else
-    s.add_runtime_dependency('rmagick','>= 2.13.1')
+    s.add_runtime_dependency('rmagick','>= 5.5.0')
   end
 end
 

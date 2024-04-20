@@ -13,9 +13,9 @@ module EasyCaptcha
         route 'captcha_route'
       end
 
-      def add_after_filter #:nodoc:
+      def add_after_action #:nodoc:
         inject_into_class "app/controllers/application_controller.rb", ApplicationController do
-          "  # reset captcha code after each request for security\n  after_filter :reset_last_captcha_code!\n\n"
+          "  # reset captcha code after each request for security\n  after_action :reset_last_captcha_code!\n\n"
         end
       end
     end

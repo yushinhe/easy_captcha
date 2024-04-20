@@ -1,21 +1,30 @@
 = EasyCaptcha
 A simple captcha implementation for rails 3 based on rmagick
 
-Tested with Rails 3.2.8
-
-https://travis-ci.org/phatworx/easy_captcha.png
+Tested with Rails 7
 
 == Installation
+
+clone to vendor/gems
+
+```bash
+  mkdir -p vendor/gems
+  cd vendor/gems
+  git clone https://github.com/4point/easy_captcha
+```
+
 add to Gemfile
-  gem 'easy_captcha'
+
+```ruby
+  gem 'easy_captcha', path: 'vendor/gems/easy_captcha'
   gem 'rmagick'
-
-for java you can use
-
-  gem 'rmagick4j'
+```
 
 after bundle execute
+
+```bash
   rails g easy_captcha:install
+```
 
 == Configuration
 You can configure easy_captcha in "config/initializers/easy_captcha.rb", if you want to customize the default configuration
