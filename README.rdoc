@@ -7,24 +7,18 @@ Tested with Rails 7
 
 clone to vendor/gems
 
-```bash
   mkdir -p vendor/gems
   cd vendor/gems
   git clone https://github.com/4point/easy_captcha
-```
 
 add to Gemfile
 
-```ruby
   gem 'easy_captcha', path: 'vendor/gems/easy_captcha'
   gem 'rmagick'
-```
 
 after bundle execute
 
-```bash
   rails g easy_captcha:install
-```
 
 == Configuration
 You can configure easy_captcha in "config/initializers/easy_captcha.rb", if you want to customize the default configuration
