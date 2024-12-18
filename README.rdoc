@@ -119,10 +119,13 @@ It is strongly recommended to enable caching. You can see the three paramters wh
     <% if request.post? %>
       <p><%= valid_captcha?(params[:captcha]) ? 'valid' : 'invalid' %> captcha</p>
     <% end %>
-    <p><%= captcha_tag %></p>
+    <p><%= captcha_tag( url , {}) %> </p>
     <p><%= text_field_tag :captcha %></p>
     <p><%= submit_tag 'Validate' %></p>
   <% end %>
+
+== captcha_tag裡的url 要將從被引用的專案使用
+原因: 否則 environment/production.rb 設定 config.action_controller.asset_host 會讓 captcha_tag 帶入asset_host 而無法正常顯示
 
 == Example app
 You find an example app under: http://github.com/phatworx/easy_captcha_example
